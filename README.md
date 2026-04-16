@@ -1,20 +1,20 @@
 AI Customer Management Portal with Churn Prediction
 
-Hackathon
+Hackathon:
 Hack2Hire 2026
 
-Problem Statement
+Problem Statement:
 Smart Customer Management Portal with AI‑Driven Insights
 
 
-Project Overview
+Project Overview:
 
 This project builds an intelligent customer analytics portal designed to help organizations manage customer records, monitor engagement indicators, and prepare for churn prediction using structured enterprise-style datasets.
 
 The system currently supports dataset management and backend database operations required for building an AI‑driven customer insights platform.
 
 
-Features Implemented (Current Stage)
+Features Implemented (Current Stage):
 
 Project Structure Setup
 
