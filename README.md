@@ -7,110 +7,192 @@ Problem Statement:
 Smart Customer Management Portal with AI‑Driven Insights
 
 
-Project Overview:
+Project Overview
 
-This project builds an intelligent customer analytics portal designed to help organizations manage customer records, monitor engagement indicators, and prepare for churn prediction using structured enterprise-style datasets.
+This project is designed to build an intelligent customer management and analytics portal that helps organizations monitor customer engagement, identify risk levels, and predict possible churn using structured customer data.
 
-The system currently supports dataset management and backend database operations required for building an AI‑driven customer insights platform.
+The system currently supports customer dataset management, database operations, customer health score calculation, and churn prediction with explanation logic.
 
 
-Features Implemented (Current Stage):
+Project Objectives
 
-Project Structure Setup
+Store and manage customer company records
 
-Organized modular project structure for scalable development:
+Track engagement indicators such as usage, support tickets, and satisfaction score
+
+Calculate customer health score
+
+Predict churn risk level
+
+Explain reasons behind churn risk
+
+Prepare the system for analytics dashboard integration
+
+
+Project Structure
 
 ai-customer-management-portal/
 
 data/
+customers.csv
+
 backend/
+database.py
+view_customers.py
+add_customer.py
+update_customer.py
+delete_customer.py
+health_score.py
+churn_prediction.py
+
 frontend/
 models/
 reports/
 queries/
 
 
-Synthetic Customer Dataset
+Dataset Description
 
-Created structured dataset
+The dataset contains synthetic enterprise customer records created for analytics simulation.
 
-File:
-data/customers.csv
+Fields included:
 
-Dataset fields include:
+company_name
 
-company_name  
-region  
-plan_tier  
-devices_count  
-support_tickets  
-monthly_usage  
-nps_score  
-contract_expiry  
+region
 
-This dataset forms the foundation for analytics and prediction modules.
+plan_tier
 
+devices_count
 
-SQLite Database Integration
+support_tickets
 
-Implemented database layer using SQLite
+monthly_usage
 
-File:
-backend/database.py
+nps_score
 
-Features:
-
-Created customers database  
-Designed customers table schema  
-Imported CSV dataset into database  
-Enabled structured data storage  
-
-Database file:
-
-customers.db
+contract_expiry
 
 
-CRUD Backend Operations
+Database Integration
 
-Implemented complete customer data operations
+SQLite database is used for structured storage.
 
-View Customers  
-File:
-backend/view_customers.py
+Implemented features:
 
-Add Customer  
-File:
-backend/add_customer.py
+Created customers database
 
-Update Customer  
-File:
-backend/update_customer.py
+Created customers table schema
 
-Delete Customer  
-File:
-backend/delete_customer.py
+Imported dataset into database
 
-These operations establish the backend logic required for a functional CRM portal.
+Enabled CRUD operations on customer records
 
 
-System Architecture (Current Stage)
+CRUD Operations Implemented
 
-customers.csv  
-↓  
-SQLite Database (customers.db)  
-↓  
-CRUD Backend Operations  
-↓  
-Analytics Modules (Upcoming)  
-↓  
-Prediction Engine (Upcoming)  
-↓  
-Dashboard Interface (Upcoming)
+The system currently supports:
+
+View customer records
+
+Add new customer records
+
+Update existing customer details
+
+Delete customer records
+
+
+Customer Health Score Module
+
+Customer health score is calculated using:
+
+monthly usage level
+
+number of support tickets
+
+NPS score
+
+contract expiry timeline
+
+Customers are classified as:
+
+Healthy
+
+Warning
+
+Risk
+
+This helps identify engagement quality of each customer.
+
+
+Churn Prediction Module
+
+The churn prediction system estimates whether a customer may leave soon.
+
+Prediction is based on:
+
+low product usage
+
+high support ticket count
+
+low NPS score
+
+contract nearing expiry
+
+Customers are classified as:
+
+Low Risk
+
+Medium Risk
+
+High Risk
+
+
+Churn Explanation Feature
+
+The system also explains why a customer is marked as high risk.
+
+Example:
+
+Low usage
+
+High support tickets
+
+Low NPS score
+
+Contract expiring soon
+
+This improves decision‑making clarity for customer success teams.
+
+
+System Workflow
+
+customers.csv
+
+↓
+
+SQLite database (customers.db)
+
+↓
+
+CRUD operations
+
+↓
+
+Health score calculation
+
+↓
+
+Churn prediction engine
+
+↓
+
+Risk explanation output
 
 
 Technology Stack
 
-Backend:
+Programming Language:
 Python
 
 Database:
@@ -120,51 +202,49 @@ Dataset Format:
 CSV
 
 
-Upcoming Modules
-
-Customer Health Score Engine  
-Churn Prediction Module  
-Natural Language Query Interface  
-Weekly Report Generator  
-Analytics Dashboard  
-
-
 Current Development Status
 
 Completed:
 
-Project folder structure setup  
-Synthetic dataset creation  
-SQLite database integration  
-Customer CRUD backend implementation  
+Project folder structure setup
+
+Synthetic dataset creation
+
+SQLite database integration
+
+Customer CRUD backend implementation
+
+Customer health score calculation module
+
+Churn prediction module
+
+Risk explanation logic
 
 
-In Progress:
+Upcoming Modules
 
-Portal analytics modules
+Natural language customer query interface
 
+Weekly analytics report generator
 
-Upcoming:
-
-Customer health score calculation  
-Churn prediction engine  
-Natural language query support  
-Weekly report generation system  
-Dashboard visualization layer  
+Dashboard-style portal interface
 
 
 Use Case
 
 This system helps organizations:
 
-Manage customer company records  
-Track engagement indicators  
-Prepare churn prediction inputs  
-Support analytics-driven decision making  
+monitor customer engagement
+
+detect churn risk early
+
+analyze customer satisfaction trends
+
+support retention decision making
 
 
 Repository Status
 
 Active development in progress as part of Hack2Hire build phase.
 
-Core backend database layer completed successfully.
+Core analytics backend successfully implemented.
