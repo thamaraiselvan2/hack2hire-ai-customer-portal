@@ -1,4 +1,4 @@
-AI Customer Management Portal with Churn Prediction
+AI CUSTOMER MANAGEMENT PORTAL WITH CHURN PREDICTION
 
 Hackathon:
 Hack2Hire 2026
@@ -7,14 +7,14 @@ Problem Statement:
 Smart Customer Management Portal with AI‑Driven Insights
 
 
-Project Overview
+=== PROJECT OVERVIEW ===
 
-This project is designed to build an intelligent customer management and analytics portal that helps organizations monitor customer engagement, identify risk levels, and predict possible churn using structured customer data.
+This project builds an intelligent customer management portal that helps organizations monitor customer engagement, identify risk levels, and predict possible churn using structured customer data.
 
-The system currently supports customer dataset management, database operations, customer health score calculation, and churn prediction with explanation logic.
+The system supports customer record management, analytics insights, churn prediction, chatbot-style querying, and automated reporting.
 
 
-Project Objectives
+=== PROJECT OBJECTIVES ===
 
 Store and manage customer company records
 
@@ -26,10 +26,12 @@ Predict churn risk level
 
 Explain reasons behind churn risk
 
-Prepare the system for analytics dashboard integration
+Support chatbot-style customer queries
+
+Generate weekly analytics summary reports
 
 
-Project Structure
+=== PROJECT STRUCTURE ===
 
 ai-customer-management-portal/
 
@@ -45,76 +47,71 @@ delete_customer.py
 health_score.py
 churn_prediction.py
 
+queries/
+nl_query.py
+
+reports/
+weekly_report.py
+
 frontend/
 models/
-reports/
-queries/
 
 
-Dataset Description
+=== DATASET DESCRIPTION ===
 
-The dataset contains synthetic enterprise customer records created for analytics simulation.
+Dataset fields:
 
-Fields included:
+company_name  
+region  
+plan_tier  
+devices_count  
+support_tickets  
+monthly_usage  
+nps_score  
+contract_expiry  
 
-company_name
-
-region
-
-plan_tier
-
-devices_count
-
-support_tickets
-
-monthly_usage
-
-nps_score
-
-contract_expiry
+This dataset simulates enterprise customer engagement data.
 
 
-Database Integration
+=== DATABASE INTEGRATION ===
 
-SQLite database is used for structured storage.
+SQLite database used for structured storage.
 
-Implemented features:
+Implemented:
 
-Created customers database
+Database creation
 
-Created customers table schema
+Table schema setup
 
-Imported dataset into database
+CSV dataset insertion
 
-Enabled CRUD operations on customer records
+Customer CRUD operations
 
 
-CRUD Operations Implemented
-
-The system currently supports:
+=== CRUD OPERATIONS IMPLEMENTED ===
 
 View customer records
 
-Add new customer records
+Add customer records
 
-Update existing customer details
+Update customer details
 
 Delete customer records
 
 
-Customer Health Score Module
+=== CUSTOMER HEALTH SCORE MODULE ===
 
-Customer health score is calculated using:
+Health score calculated using:
 
 monthly usage level
 
-number of support tickets
+support ticket count
 
 NPS score
 
 contract expiry timeline
 
-Customers are classified as:
+Customers classified as:
 
 Healthy
 
@@ -122,24 +119,20 @@ Warning
 
 Risk
 
-This helps identify engagement quality of each customer.
 
+=== CHURN PREDICTION MODULE ===
 
-Churn Prediction Module
+Predicts likelihood of customer churn based on:
 
-The churn prediction system estimates whether a customer may leave soon.
+low usage
 
-Prediction is based on:
-
-low product usage
-
-high support ticket count
+high support tickets
 
 low NPS score
 
 contract nearing expiry
 
-Customers are classified as:
+Customers classified as:
 
 Low Risk
 
@@ -148,11 +141,11 @@ Medium Risk
 High Risk
 
 
-Churn Explanation Feature
+=== CHURN EXPLANATION FEATURE ===
 
-The system also explains why a customer is marked as high risk.
+System explains why a customer is marked at risk.
 
-Example:
+Example reasons:
 
 Low usage
 
@@ -162,10 +155,38 @@ Low NPS score
 
 Contract expiring soon
 
-This improves decision‑making clarity for customer success teams.
+
+=== CHATBOT QUERY MODULE ===
+
+Supports natural language queries such as:
+
+show high risk customers
+
+show premium customers
+
+show low usage customers
+
+Allows quick analytics-style interaction with customer data.
 
 
-System Workflow
+=== WEEKLY REPORT GENERATOR ===
+
+Automatically generates summary analytics:
+
+Total customers
+
+Healthy customers
+
+Warning customers
+
+High risk customers
+
+Low usage customers
+
+Contracts expiring soon
+
+
+=== SYSTEM WORKFLOW ===
 
 customers.csv
 
@@ -189,8 +210,16 @@ Churn prediction engine
 
 Risk explanation output
 
+↓
 
-Technology Stack
+Chatbot query interface
+
+↓
+
+Weekly analytics report generation
+
+
+=== TECHNOLOGY STACK ===
 
 Programming Language:
 Python
@@ -202,35 +231,37 @@ Dataset Format:
 CSV
 
 
-Current Development Status
+=== CURRENT DEVELOPMENT STATUS ===
 
 Completed:
 
-Project folder structure setup
+Dataset creation
 
-Synthetic dataset creation
+Database integration
 
-SQLite database integration
+CRUD backend operations
 
-Customer CRUD backend implementation
-
-Customer health score calculation module
+Health score analytics module
 
 Churn prediction module
 
-Risk explanation logic
+Risk explanation feature
 
-
-Upcoming Modules
-
-Natural language customer query interface
+Chatbot query module
 
 Weekly analytics report generator
 
-Dashboard-style portal interface
+
+=== UPCOMING ENHANCEMENTS ===
+
+Portal menu interface (interactive control panel)
+
+Dashboard visualization layer (optional upgrade)
+
+Contract expiry alert system
 
 
-Use Case
+=== USE CASE ===
 
 This system helps organizations:
 
@@ -238,13 +269,13 @@ monitor customer engagement
 
 detect churn risk early
 
-analyze customer satisfaction trends
+analyze satisfaction trends
 
 support retention decision making
 
 
-Repository Status
+=== REPOSITORY STATUS ===
 
 Active development in progress as part of Hack2Hire build phase.
 
-Core analytics backend successfully implemented.
+Core analytics and prediction modules successfully implemented.
