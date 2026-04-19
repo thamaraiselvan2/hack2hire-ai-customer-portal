@@ -1,65 +1,103 @@
 AI CUSTOMER MANAGEMENT PORTAL WITH CHURN PREDICTION
-
-Hackathon:
-Hack2Hire 2026
+Hackathon Project — Hack2Hire 2026
 
 Problem Statement:
 Smart Customer Management Portal with AI‑Driven Insights
 
 
-=== PROJECT OVERVIEW ===
+=====================================
+PROJECT OVERVIEW
+=====================================
 
-This project builds an intelligent customer management portal that helps organizations monitor customer engagement, identify risk levels, and predict possible churn using structured customer data.
+The AI Customer Management Portal is an intelligent analytics system that helps organizations monitor customer engagement, identify churn risk levels, and generate actionable insights using structured enterprise customer data.
 
-The system supports customer record management, analytics insights, churn prediction, chatbot-style querying, and automated reporting.
+The system integrates customer record management, analytics modules, churn prediction logic, chatbot‑style querying, weekly reporting, and an interactive dashboard interface powered by Flask.
 
-
-=== PROJECT OBJECTIVES ===
-
-Store and manage customer company records
-
-Track engagement indicators such as usage, support tickets, and satisfaction score
-
-Calculate customer health score
-
-Predict churn risk level
-
-Explain reasons behind churn risk
-
-Support chatbot-style customer queries
-
-Generate weekly analytics summary reports
+This portal transforms raw engagement signals into decision‑ready retention intelligence.
 
 
-=== PROJECT STRUCTURE ===
+=====================================
+PROJECT OBJECTIVES
+=====================================
+
+The system is designed to:
+
+• Store and manage enterprise customer company records  
+• Track engagement indicators such as usage, support tickets, and satisfaction score  
+• Calculate customer health score dynamically  
+• Predict churn risk level using engagement signals  
+• Explain reasons behind churn classification  
+• Support chatbot‑style analytics queries  
+• Generate weekly analytics summary reports  
+• Provide an interactive dashboard visualization layer  
+
+
+=====================================
+SYSTEM WORKFLOW
+=====================================
+
+customers.csv  
+↓  
+SQLite database (customers.db)  
+↓  
+CRUD operations layer  
+↓  
+Health score calculation engine  
+↓  
+Churn prediction engine  
+↓  
+Risk explanation module  
+↓  
+Natural language query interface  
+↓  
+Weekly analytics report generator  
+↓  
+Flask web dashboard interface  
+
+
+=====================================
+PROJECT STRUCTURE
+=====================================
 
 ai-customer-management-portal/
 
 data/
-customers.csv
+    customers.csv
 
 backend/
-database.py
-view_customers.py
-add_customer.py
-update_customer.py
-delete_customer.py
-health_score.py
-churn_prediction.py
+    database.py
+    view_customers.py
+    add_customer.py
+    update_customer.py
+    delete_customer.py
+    health_score.py
+    churn_prediction.py
 
 queries/
-nl_query.py
+    nl_query.py
 
 reports/
-weekly_report.py
+    weekly_report.py
 
 frontend/
+    index.html
+    style.css
+    script.js
+
 models/
+    (reserved for future ML integration)
+
+app.py
+README.md
 
 
-=== DATASET DESCRIPTION ===
+=====================================
+DATASET DESCRIPTION
+=====================================
 
-Dataset fields:
+Dataset simulates enterprise customer engagement indicators.
+
+Fields included:
 
 company_name  
 region  
@@ -70,159 +108,172 @@ monthly_usage
 nps_score  
 contract_expiry  
 
-This dataset simulates enterprise customer engagement data.
+These indicators power the customer health scoring and churn prediction logic.
 
 
-=== DATABASE INTEGRATION ===
+=====================================
+DATABASE INTEGRATION
+=====================================
 
-SQLite database used for structured storage.
+SQLite database is used for structured storage.
 
 Implemented:
 
-Database creation
+• Database schema creation  
+• CSV dataset ingestion  
+• Persistent customer storage  
+• Backend CRUD operations  
 
-Table schema setup
+Database file:
 
-CSV dataset insertion
+customers.db
 
-Customer CRUD operations
 
+=====================================
+CRUD OPERATIONS IMPLEMENTED
+=====================================
 
-=== CRUD OPERATIONS IMPLEMENTED ===
+Supported customer lifecycle operations:
 
-View customer records
+• View customer records  
+• Add customer records  
+• Update customer engagement details  
+• Delete customer records  
 
-Add customer records
+Modules:
 
-Update customer details
+add_customer.py  
+update_customer.py  
+delete_customer.py  
+view_customers.py  
 
-Delete customer records
 
+=====================================
+CUSTOMER HEALTH SCORE MODULE
+=====================================
 
-=== CUSTOMER HEALTH SCORE MODULE ===
+Customer health score calculated using:
 
-Health score calculated using:
+• monthly usage level  
+• support ticket count  
+• NPS satisfaction score  
+• contract expiry timeline  
 
-monthly usage level
+Classification:
 
-support ticket count
+Healthy   → score between 70 and 100  
+Warning   → score between 40 and 69  
+Risk      → score below 40  
 
-NPS score
+This enables early retention prioritization.
 
-contract expiry timeline
 
-Customers classified as:
+=====================================
+CHURN PREDICTION MODULE
+=====================================
 
-Healthy
+Churn likelihood estimated using engagement behavior signals:
 
-Warning
+• low usage activity  
+• high support tickets  
+• low NPS satisfaction score  
+• contract nearing expiry  
 
-Risk
+Classification:
 
+Low Risk  
+Medium Risk  
+High Risk  
 
-=== CHURN PREDICTION MODULE ===
+Supports proactive retention strategy planning.
 
-Predicts likelihood of customer churn based on:
 
-low usage
+=====================================
+CHURN RISK EXPLANATION FEATURE
+=====================================
 
-high support tickets
+System explains why customers are flagged as high risk.
 
-low NPS score
+Example explanations:
 
-contract nearing expiry
+Low monthly usage detected  
+High support ticket volume  
+Low NPS satisfaction score  
+Contract nearing expiry  
 
-Customers classified as:
 
-Low Risk
+=====================================
+CHATBOT QUERY MODULE
+=====================================
 
-Medium Risk
+Supports natural language analytics queries such as:
 
-High Risk
+show high risk customers  
+show enterprise customers  
+customers with low usage  
+contracts expiring soon  
+customers with low NPS score  
 
+Module:
 
-=== CHURN EXPLANATION FEATURE ===
+queries/nl_query.py
 
-System explains why a customer is marked at risk.
 
-Example reasons:
+=====================================
+WEEKLY REPORT GENERATOR
+=====================================
 
-Low usage
+Automatically generates analytics summary including:
 
-High support tickets
+Total customers  
+Healthy customers  
+Warning customers  
+High risk customers  
+Low usage customers  
+Contracts expiring soon  
 
-Low NPS score
+Module:
 
-Contract expiring soon
+reports/weekly_report.py
 
 
-=== CHATBOT QUERY MODULE ===
+=====================================
+FRONTEND DASHBOARD INTERFACE
+=====================================
 
-Supports natural language queries such as:
+Interactive analytics dashboard includes:
 
-show high risk customers
+• customer statistics overview  
+• churn risk visualization panels  
+• customer health segmentation  
+• AI query assistant interface  
+• weekly analytics report viewer  
 
-show premium customers
+Frontend files:
 
-show low usage customers
+frontend/index.html  
+frontend/style.css  
+frontend/script.js  
 
-Allows quick analytics-style interaction with customer data.
+Connected backend APIs:
 
+/api/dashboard  
+/api/customers  
+/api/health  
+/api/churn  
+/api/query  
+/api/report/weekly  
 
-=== WEEKLY REPORT GENERATOR ===
 
-Automatically generates summary analytics:
-
-Total customers
-
-Healthy customers
-
-Warning customers
-
-High risk customers
-
-Low usage customers
-
-Contracts expiring soon
-
-
-=== SYSTEM WORKFLOW ===
-
-customers.csv
-
-↓
-
-SQLite database (customers.db)
-
-↓
-
-CRUD operations
-
-↓
-
-Health score calculation
-
-↓
-
-Churn prediction engine
-
-↓
-
-Risk explanation output
-
-↓
-
-Chatbot query interface
-
-↓
-
-Weekly analytics report generation
-
-
-=== TECHNOLOGY STACK ===
+=====================================
+TECHNOLOGY STACK
+=====================================
 
 Programming Language:
 Python
+
+Backend Framework:
+Flask
 
 Database:
 SQLite
@@ -230,52 +281,63 @@ SQLite
 Dataset Format:
 CSV
 
+Frontend:
+HTML, CSS, JavaScript
 
-=== CURRENT DEVELOPMENT STATUS ===
+Charts:
+Chart.js
+
+
+=====================================
+CURRENT DEVELOPMENT STATUS
+=====================================
 
 Completed:
 
-Dataset creation
-
-Database integration
-
-CRUD backend operations
-
-Health score analytics module
-
-Churn prediction module
-
-Risk explanation feature
-
-Chatbot query module
-
-Weekly analytics report generator
+✔ Dataset preparation  
+✔ SQLite database integration  
+✔ CRUD backend services  
+✔ Customer health score module  
+✔ Churn prediction module  
+✔ Risk explanation feature  
+✔ Natural language query module  
+✔ Weekly analytics report generator  
+✔ Frontend dashboard interface created  
+✔ Flask API integration in progress  
 
 
-=== UPCOMING ENHANCEMENTS ===
+=====================================
+UPCOMING ENHANCEMENTS
+=====================================
 
-Portal menu interface (interactive control panel)
+Planned improvements:
 
-Dashboard visualization layer (optional upgrade)
+• Live dashboard visualization sync  
+• Dynamic customer table integration  
+• Contract expiry alert system  
+• PDF weekly report export  
+• Machine learning churn prediction upgrade  
+• Deployment pipeline setup  
 
-Contract expiry alert system
 
-
-=== USE CASE ===
+=====================================
+USE CASE
+=====================================
 
 This system helps organizations:
 
-monitor customer engagement
-
-detect churn risk early
-
-analyze satisfaction trends
-
-support retention decision making
+• monitor customer engagement health  
+• detect churn risk early  
+• analyze satisfaction trends  
+• improve renewal probability  
+• support retention decision making  
 
 
-=== REPOSITORY STATUS ===
+=====================================
+REPOSITORY STATUS
+=====================================
 
-Active development in progress as part of Hack2Hire build phase.
+Active development in progress as part of Hack2Hire 2026 build phase.
 
-Core analytics and prediction modules successfully implemented.
+Core analytics and prediction modules completed  
+Dashboard backend integration currently ongoing
