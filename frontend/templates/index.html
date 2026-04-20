@@ -9,7 +9,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet" />
-<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 <style>
   :root {
     --bg: #090d18;
@@ -465,8 +465,9 @@
 
 <!-- ══════════════════════════════════════════
      HERO SECTION
+     FIX: Changed min-height from 100vh to 70vh to prevent blocking content below
 ══════════════════════════════════════════ -->
-<section id="hero" style="position:relative;min-height:100vh;display:flex;align-items:center;justify-content:center;padding:120px 24px 80px;overflow:hidden;">
+<section id="hero" style="position:relative;min-height:70vh;display:flex;align-items:center;justify-content:center;padding:120px 24px 80px;overflow:hidden;">
 
   <!-- Background effects -->
   <div class="hero-grid"></div>
@@ -545,20 +546,20 @@
   <div class="max-w-5xl mx-auto glass" style="border-radius:16px;padding:32px 40px;">
     <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:24px;text-align:center;">
       <div class="fade-up">
-        <div id="statTotalCustomers" class="stat-num grad-text">1,284</div>
+        <div id="statTotalCustomers" class="stat-num grad-text">—</div>
         <div style="font-size:13px;color:var(--muted);margin-top:4px;">Total Customers</div>
       </div>
       <div class="h-line" style="display:none;"></div>
       <div class="fade-up" style="animation-delay:0.1s;">
-        <div id="statHealthyCustomers" class="stat-num grad-text">891</div>
+        <div id="statHealthyCustomers" class="stat-num grad-text">—</div>
         <div style="font-size:13px;color:var(--muted);margin-top:4px;">Healthy Customers</div>
       </div>
       <div class="fade-up" style="animation-delay:0.2s;">
-        <div id="statWarningCustomers" class="stat-num grad-text">247</div>
+        <div id="statWarningCustomers" class="stat-num grad-text">—</div>
         <div style="font-size:13px;color:var(--muted);margin-top:4px;">Warning Customers</div>
       </div>
       <div class="fade-up" style="animation-delay:0.3s;">
-        <div id="statRiskCustomers" class="stat-num grad-text">146</div>
+        <div id="statRiskCustomers" class="stat-num grad-text">—</div>
         <div style="font-size:13px;color:var(--muted);margin-top:4px;">High Risk Customers</div>
       </div>
     </div>
@@ -679,7 +680,7 @@
         <!-- KPI Cards -->
         <div class="kpi-card">
           <div style="font-size:11px;color:var(--muted);letter-spacing:0.08em;text-transform:uppercase;font-weight:600;margin-bottom:8px;">Total Customers</div>
-          <div id="totalCustomers" style="font-family:'Syne',sans-serif;font-size:28px;font-weight:800;color:var(--text);">1,284</div>
+          <div id="totalCustomers" style="font-family:'Syne',sans-serif;font-size:28px;font-weight:800;color:var(--text);">—</div>
           <div style="display:flex;align-items:center;gap:4px;margin-top:6px;">
             <span style="color:#22c55e;font-size:12px;font-weight:600;">↑ 18.4%</span>
             <span style="color:var(--muted);font-size:12px;">vs last month</span>
@@ -689,7 +690,7 @@
 
         <div class="kpi-card">
           <div style="font-size:11px;color:var(--muted);letter-spacing:0.08em;text-transform:uppercase;font-weight:600;margin-bottom:8px;">Healthy Customers</div>
-          <div id="healthyCustomers" style="font-family:'Syne',sans-serif;font-size:28px;font-weight:800;color:var(--text);">891</div>
+          <div id="healthyCustomers" style="font-family:'Syne',sans-serif;font-size:28px;font-weight:800;color:var(--text);">—</div>
           <div style="display:flex;align-items:center;gap:4px;margin-top:6px;">
             <span style="color:#22c55e;font-size:12px;font-weight:600;">↑ 3.2%</span>
             <span style="color:var(--muted);font-size:12px;">vs last month</span>
@@ -699,7 +700,7 @@
 
         <div class="kpi-card">
           <div style="font-size:11px;color:var(--muted);letter-spacing:0.08em;text-transform:uppercase;font-weight:600;margin-bottom:8px;">Warning Customers</div>
-          <div id="warningCustomers" style="font-family:'Syne',sans-serif;font-size:28px;font-weight:800;color:var(--text);">247</div>
+          <div id="warningCustomers" style="font-family:'Syne',sans-serif;font-size:28px;font-weight:800;color:var(--text);">—</div>
           <div style="display:flex;align-items:center;gap:4px;margin-top:6px;">
             <span style="color:#22c55e;font-size:12px;font-weight:600;">↑ 7.8%</span>
             <span style="color:var(--muted);font-size:12px;">vs last month</span>
@@ -709,7 +710,7 @@
 
         <div class="kpi-card">
           <div style="font-size:11px;color:var(--muted);letter-spacing:0.08em;text-transform:uppercase;font-weight:600;margin-bottom:8px;">High Risk Customers</div>
-          <div id="highRiskCustomers" style="font-family:'Syne',sans-serif;font-size:28px;font-weight:800;color:#f43f5e;">146</div>
+          <div id="highRiskCustomers" style="font-family:'Syne',sans-serif;font-size:28px;font-weight:800;color:#f43f5e;">—</div>
           <div style="display:flex;align-items:center;gap:4px;margin-top:6px;">
             <span style="color:#f43f5e;font-size:12px;font-weight:600;">↓ 12.1%</span>
             <span style="color:var(--muted);font-size:12px;">vs last month</span>
@@ -763,29 +764,14 @@
       </div>
 
       <!-- Churn alert panel -->
+      <!-- FIX: Removed static demo cards with {{placeholders}}; JS will populate this container -->
       <div style="padding:0 24px 24px;">
         <div style="background:var(--surface2);border:1px solid var(--border);border-radius:12px;padding:20px;">
           <div style="font-family:'Syne',sans-serif;font-weight:700;font-size:14px;margin-bottom:16px;display:flex;align-items:center;gap:8px;">
             <span style="color:#f43f5e;">⚠</span> Churn Risk Alerts
-            <span style="margin-left:auto;font-size:11px;background:rgba(244,63,94,0.1);color:#f43f5e;padding:3px 10px;border-radius:100px;font-weight:600;">3 High Priority</span>
+            <span style="margin-left:auto;font-size:11px;background:rgba(244,63,94,0.1);color:#f43f5e;padding:3px 10px;border-radius:100px;font-weight:600;">High Priority</span>
           </div>
-          <div id="churnAlertsContainer" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px;">
-            <div class="churn-alert">
-              <div style="font-size:13px;font-weight:600;margin-bottom:2px;">{{customer_name}}</div>
-              <div style="font-size:11px;color:var(--muted);">Churn Probability: <strong style="color:#f43f5e;">{{churn_probability}}</strong></div>
-              <div style="font-size:11px;color:var(--muted);">Last active: 14 days ago</div>
-            </div>
-            <div class="churn-alert">
-              <div style="font-size:13px;font-weight:600;margin-bottom:2px;">{{customer_name}}</div>
-              <div style="font-size:11px;color:var(--muted);">Churn Probability: <strong style="color:#f43f5e;">{{churn_probability}}</strong></div>
-              <div style="font-size:11px;color:var(--muted);">Usage dropped 62% this week</div>
-            </div>
-            <div class="churn-alert">
-              <div style="font-size:13px;font-weight:600;margin-bottom:2px;">{{customer_name}}</div>
-              <div style="font-size:11px;color:var(--muted);">Churn Probability: <strong style="color:#fbbf24;">{{churn_probability}}</strong></div>
-              <div style="font-size:11px;color:var(--muted);">Open support tickets: 3</div>
-            </div>
-          </div>
+          <div id="churnAlertsContainer" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px;"></div>
         </div>
       </div>
 
@@ -904,6 +890,7 @@
       </div>
 
       <!-- Right: Health Score Visual -->
+      <!-- FIX: Removed static demo rows with {{placeholders}}; JS will populate healthScoreContainer -->
       <div class="fade-up" style="animation-delay:0.15s;">
         <div class="dashboard-mock">
           <div class="db-topbar">
@@ -913,65 +900,7 @@
             <span style="margin-left:12px;font-size:12px;color:var(--muted);font-family:'Syne',sans-serif;">Customer Health Scores</span>
           </div>
           <div id="healthScoreContainer" style="padding:24px;display:flex;flex-direction:column;gap:14px;">
-
-            <div style="display:flex;align-items:center;justify-content:space-between;padding:14px 16px;background:var(--surface2);border:1px solid var(--border);border-radius:10px;">
-              <div style="display:flex;align-items:center;gap:12px;">
-                <div style="width:8px;height:8px;border-radius:50%;background:#22c55e;"></div>
-                <span style="font-size:13px;font-weight:600;">{{customer_name}}</span>
-              </div>
-              <div style="display:flex;align-items:center;gap:12px;">
-                <div style="width:120px;height:6px;border-radius:3px;background:var(--surface);overflow:hidden;"><div style="width:92%;height:100%;background:linear-gradient(90deg,#22c55e,#4ade80);border-radius:3px;"></div></div>
-                <span style="font-family:'Syne',sans-serif;font-weight:800;font-size:14px;color:#22c55e;">{{health_score}}</span>
-              </div>
-            </div>
-
-            <div style="display:flex;align-items:center;justify-content:space-between;padding:14px 16px;background:var(--surface2);border:1px solid var(--border);border-radius:10px;">
-              <div style="display:flex;align-items:center;gap:12px;">
-                <div style="width:8px;height:8px;border-radius:50%;background:#22c55e;"></div>
-                <span style="font-size:13px;font-weight:600;">{{customer_name}}</span>
-              </div>
-              <div style="display:flex;align-items:center;gap:12px;">
-                <div style="width:120px;height:6px;border-radius:3px;background:var(--surface);overflow:hidden;"><div style="width:78%;height:100%;background:linear-gradient(90deg,#38bdf8,#22d3ee);border-radius:3px;"></div></div>
-                <span style="font-family:'Syne',sans-serif;font-weight:800;font-size:14px;color:var(--blue);">{{health_score}}</span>
-              </div>
-            </div>
-
-            <div style="display:flex;align-items:center;justify-content:space-between;padding:14px 16px;background:var(--surface2);border:1px solid var(--border);border-radius:10px;">
-              <div style="display:flex;align-items:center;gap:12px;">
-                <div style="width:8px;height:8px;border-radius:50%;background:#fbbf24;"></div>
-                <span style="font-size:13px;font-weight:600;">{{customer_name}}</span>
-              </div>
-              <div style="display:flex;align-items:center;gap:12px;">
-                <div style="width:120px;height:6px;border-radius:3px;background:var(--surface);overflow:hidden;"><div style="width:55%;height:100%;background:linear-gradient(90deg,#fbbf24,#f59e0b);border-radius:3px;"></div></div>
-                <span style="font-family:'Syne',sans-serif;font-weight:800;font-size:14px;color:#fbbf24;">{{health_score}}</span>
-              </div>
-            </div>
-
-            <div style="display:flex;align-items:center;justify-content:space-between;padding:14px 16px;background:rgba(244,63,94,0.05);border:1px solid rgba(244,63,94,0.2);border-radius:10px;">
-              <div style="display:flex;align-items:center;gap:12px;">
-                <div style="width:8px;height:8px;border-radius:50%;background:#f43f5e;"></div>
-                <span style="font-size:13px;font-weight:600;">{{customer_name}}</span>
-                <span style="font-size:10px;background:rgba(244,63,94,0.15);color:#f43f5e;padding:2px 8px;border-radius:100px;font-weight:700;">At Risk</span>
-              </div>
-              <div style="display:flex;align-items:center;gap:12px;">
-                <div style="width:120px;height:6px;border-radius:3px;background:var(--surface);overflow:hidden;"><div style="width:28%;height:100%;background:linear-gradient(90deg,#f43f5e,#fb7185);border-radius:3px;"></div></div>
-                <span style="font-family:'Syne',sans-serif;font-weight:800;font-size:14px;color:#f43f5e;">{{health_score}}</span>
-              </div>
-            </div>
-
-            <div style="display:flex;align-items:center;justify-content:space-between;padding:14px 16px;background:rgba(244,63,94,0.05);border:1px solid rgba(244,63,94,0.2);border-radius:10px;">
-              <div style="display:flex;align-items:center;gap:12px;">
-                <div style="width:8px;height:8px;border-radius:50%;background:#f43f5e;"></div>
-                <span style="font-size:13px;font-weight:600;">{{customer_name}}</span>
-                <span style="font-size:10px;background:rgba(244,63,94,0.15);color:#f43f5e;padding:2px 8px;border-radius:100px;font-weight:700;">At Risk</span>
-              </div>
-              <div style="display:flex;align-items:center;gap:12px;">
-                <div style="width:120px;height:6px;border-radius:3px;background:var(--surface);overflow:hidden;"><div style="width:19%;height:100%;background:linear-gradient(90deg,#f43f5e,#fb7185);border-radius:3px;"></div></div>
-                <span style="font-family:'Syne',sans-serif;font-weight:800;font-size:14px;color:#f43f5e;">{{health_score}}</span>
-              </div>
-            </div>
-
-            <!-- Legend -->
+            <!-- Legend always visible -->
             <div style="display:flex;gap:16px;justify-content:center;padding-top:8px;flex-wrap:wrap;">
               <span style="font-size:11px;color:var(--muted);display:flex;align-items:center;gap:5px;"><span style="width:8px;height:8px;border-radius:50%;background:#22c55e;display:inline-block;"></span>Healthy (75–100)</span>
               <span style="font-size:11px;color:var(--muted);display:flex;align-items:center;gap:5px;"><span style="width:8px;height:8px;border-radius:50%;background:#fbbf24;display:inline-block;"></span>Watch (40–74)</span>
@@ -988,6 +917,33 @@
 <style>
   @media(max-width:768px) { .split-grid { grid-template-columns:1fr !important; } }
 </style>
+
+
+<!-- ══════════════════════════════════════════
+     CUSTOMERS SECTION
+     FIX: Added customersContainer div for JS population
+══════════════════════════════════════════ -->
+<section id="customers" class="fade-up" style="padding:80px 24px;">
+  <div class="max-w-7xl mx-auto">
+
+    <div style="text-align:center;margin-bottom:30px;">
+      <div class="badge" style="margin-bottom:16px;">Customer Accounts</div>
+      <h2 class="section-title">
+        Customer Accounts
+      </h2>
+    </div>
+
+    <div id="customersContainer"
+         style="
+         display:grid;
+         grid-template-columns:repeat(auto-fill,minmax(280px,1fr));
+         gap:20px;
+         margin-top:30px;
+         ">
+    </div>
+
+  </div>
+</section>
 
 
 <!-- ══════════════════════════════════════════
@@ -1040,14 +996,14 @@
         <div class="dot" style="background:#ffbd2e;"></div>
         <div class="dot" style="background:#28c840;"></div>
         <span style="margin-left:12px;font-size:12px;color:var(--muted);font-family:'Syne',sans-serif;">Churn Prediction Engine — Live Feed</span>
-        <div style="margin-left:auto;"><span class="pulse-dot"></span><span style="font-size:11px;color:#22c55e;">Monitoring 14,832 accounts</span></div>
+        <div style="margin-left:auto;"><span class="pulse-dot"></span><span style="font-size:11px;color:#22c55e;">Monitoring accounts</span></div>
       </div>
       <div style="padding:24px;display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:16px;">
 
         <div style="background:var(--surface2);border:1px solid rgba(244,63,94,0.25);border-radius:12px;padding:20px;">
           <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:16px;">
             <span style="font-family:'Syne',sans-serif;font-size:13px;font-weight:700;color:#f43f5e;">🔴 Critical Risk</span>
-            <span style="font-size:11px;color:var(--muted);">3 accounts</span>
+            <span style="font-size:11px;color:var(--muted);">High priority accounts</span>
           </div>
           <canvas id="churnChart" height="100"></canvas>
           <div style="margin-top:12px;font-size:12px;color:var(--muted);line-height:1.6;">Accounts with &gt;80% churn probability. Immediate outreach recommended.</div>
@@ -1241,20 +1197,21 @@
       </div>
 
       <!-- Right: Report preview mock -->
+      <!-- FIX: weeklyReportContainer is the outer div; JS via /api/report/weekly populates the inner content -->
       <div class="fade-up" style="animation-delay:0.2s;">
         <div class="dashboard-mock">
           <div class="db-topbar">
             <div class="dot" style="background:#ff5f57;"></div>
             <div class="dot" style="background:#ffbd2e;"></div>
             <div class="dot" style="background:#28c840;"></div>
-            <span style="margin-left:12px;font-size:12px;color:var(--muted);font-family:'Syne',sans-serif;">📋 Weekly Intelligence Report — Apr 14, 2025</span>
+            <span style="margin-left:12px;font-size:12px;color:var(--muted);font-family:'Syne',sans-serif;">📋 Weekly Intelligence Report</span>
           </div>
           <div id="weeklyReportContainer" style="padding:24px;">
 
             <!-- Report header -->
             <div style="margin-bottom:20px;padding-bottom:20px;border-bottom:1px solid var(--border);">
               <div style="font-family:'Syne',sans-serif;font-size:18px;font-weight:800;margin-bottom:6px;">Weekly Customer Intelligence</div>
-              <div style="font-size:12px;color:var(--muted);">Apr 7 – Apr 14, 2025 · Generated by AI Customer Management Portal</div>
+              <div style="font-size:12px;color:var(--muted);">Generated by AI Customer Management Portal</div>
             </div>
 
             <!-- AI summary -->
@@ -1301,60 +1258,6 @@
               </div>
             </div>
 
-          </div>
-        </div>
-      </div>
-
-    </div>
-  </div>
-</section>
-
-
-<!-- ══════════════════════════════════════════
-     CUSTOMERS (TESTIMONIALS) SECTION
-══════════════════════════════════════════ -->
-<section id="customers" style="padding:80px 24px;">
-  <div class="max-w-6xl mx-auto">
-
-    <div style="text-align:center;margin-bottom:60px;">
-      <div class="badge fade-up" style="margin-bottom:16px;">Customer Stories</div>
-      <h2 class="section-title fade-up" style="animation-delay:0.1s;">Loved by <span class="grad-text">growth teams</span><br>worldwide</h2>
-    </div>
-
-    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:20px;">
-
-      <div class="testi-card fade-up">
-        <div style="display:flex;gap:2px;margin-bottom:16px;color:#fbbf24;font-size:14px;">★★★★★</div>
-        <p style="font-size:15px;line-height:1.7;color:var(--text);margin-bottom:20px;font-style:italic;">"AI Customer Management Portal cut our churn by 38% in the first quarter. The AI explanations made it dead simple to understand why customers were leaving — and more importantly, how to stop it."</p>
-        <div style="display:flex;align-items:center;gap:12px;">
-          <div class="avatar" style="background:linear-gradient(135deg,#38bdf8,#0891b2);">SM</div>
-          <div>
-            <div style="font-family:'Syne',sans-serif;font-weight:700;font-size:14px;">Sarah Mitchell</div>
-            <div style="font-size:12px;color:var(--muted);">Head of Growth · Stackflow</div>
-          </div>
-        </div>
-      </div>
-
-      <div class="testi-card fade-up" style="animation-delay:0.1s;">
-        <div style="display:flex;gap:2px;margin-bottom:16px;color:#fbbf24;font-size:14px;">★★★★★</div>
-        <p style="font-size:15px;line-height:1.7;color:var(--text);margin-bottom:20px;font-style:italic;">"We replaced three separate analytics tools with AI Customer Management Portal. The unified view alone saved us 15 hours a week in reporting time, and the churn alerts have become indispensable for our CS team."</p>
-        <div style="display:flex;align-items:center;gap:12px;">
-          <div class="avatar" style="background:linear-gradient(135deg,#a78bfa,#7c3aed);color:#fff;">DK</div>
-          <div>
-            <div style="font-family:'Syne',sans-serif;font-weight:700;font-size:14px;">Daniel Kraft</div>
-            <div style="font-size:12px;color:var(--muted);">CTO · Vantara Health</div>
-          </div>
-        </div>
-      </div>
-
-      <div class="testi-card fade-up" style="animation-delay:0.2s;">
-        <div style="display:flex;gap:2px;margin-bottom:16px;color:#fbbf24;font-size:14px;">★★★★★</div>
-        <p style="font-size:15px;line-height:1.7;color:var(--text);margin-bottom:20px;font-style:italic;">"The behavioral segmentation feature changed how we approach product decisions entirely. We can now see exactly which features drive retention — and double down on what actually works."</p>
-        <div style="display:flex;align-items:center;gap:12px;">
-          <div class="avatar" style="background:linear-gradient(135deg,#22d3ee,#0891b2);">PL</div>
-          <div>
-            <div style="font-family:'Syne',sans-serif;font-weight:700;font-size:14px;">Priya Lindqvist</div>
-            <div style="font-size:12px;color:var(--muted);">VP Product · Meridian SaaS</div>
           </div>
         </div>
       </div>
@@ -1457,12 +1360,10 @@
 </section>
 
 
-
-
 <!-- ══════════════════════════════════════════
      JAVASCRIPT
 ══════════════════════════════════════════ -->
-<script src="script.js"></script>
+<script src="{{ url_for('static', filename='script.js') }}"></script>
 
 </body>
 </html>
