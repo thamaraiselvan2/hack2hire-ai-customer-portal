@@ -80,9 +80,11 @@ reports/
     weekly_report.py
 
 frontend/
-    index.html
-    style.css
-    script.js
+    templates/
+        index.html
+    static/
+        style.css
+        script.js
 
 models/
     (reserved for future ML integration)
