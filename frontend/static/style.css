@@ -1,6 +1,185 @@
-  @media(max-width:768px) {
-    .footer-grid { grid-template-columns:1fr 1fr !important; }
+/* ===============================
+   STYLE.CSS — AI Customer Management Portal
+   (Companion stylesheet loaded by Flask)
+   All core visual styles are in index.html <style>.
+   Use this file for any overrides or extra rules.
+=============================== */
+
+/* ─── RESPONSIVE GRID HELPERS ─── */
+
+@media (max-width: 768px) {
+  .split-grid {
+    grid-template-columns: 1fr !important;
   }
-  @media(max-width:480px) {
-    .footer-grid { grid-template-columns:1fr !important; }
+  .footer-grid {
+    grid-template-columns: 1fr 1fr !important;
   }
+  .chat-container {
+    height: 480px !important;
+  }
+}
+
+@media (max-width: 480px) {
+  .footer-grid {
+    grid-template-columns: 1fr !important;
+  }
+  .chat-container {
+    height: 420px !important;
+  }
+  .chat-suggestions {
+    gap: 6px !important;
+  }
+  .suggestion-chip {
+    font-size: 11px !important;
+    padding: 5px 10px !important;
+  }
+}
+
+/* ─── SECTION SPACING — TASK 9 ─── */
+
+section {
+  scroll-margin-top: 80px;
+}
+
+/* ─── CARD SPACING — TASK 9 ─── */
+
+.glass-card,
+.kpi-card,
+.insight-card {
+  transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+/* ─── CHAT SCROLLBAR ─── */
+
+.chat-messages::-webkit-scrollbar {
+  width: 4px;
+}
+.chat-messages::-webkit-scrollbar-track {
+  background: transparent;
+}
+.chat-messages::-webkit-scrollbar-thumb {
+  background: rgba(99, 179, 237, 0.18);
+  border-radius: 4px;
+}
+
+/* ─── CHAT BUBBLE TRANSITIONS ─── */
+
+.chat-bubble {
+  transition: box-shadow 0.2s ease;
+}
+.bubble-user:hover {
+  box-shadow: 0 4px 16px rgba(56, 189, 248, 0.12);
+}
+.bubble-ai:hover {
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.25);
+}
+
+/* ─── INPUT FOCUS STATE ─── */
+
+#queryInput:focus {
+  background: rgba(9, 13, 24, 0.9);
+}
+
+/* ─── SEND BUTTON FOCUS ─── */
+
+#queryButton:focus {
+  outline: 2px solid rgba(56, 189, 248, 0.5);
+  outline-offset: 2px;
+}
+
+/* ─── SUGGESTION CHIP ACTIVE ─── */
+
+.suggestion-chip:active {
+  transform: scale(0.96);
+  background: rgba(56, 189, 248, 0.18);
+}
+
+/* ─── GLASS CARD QUERY EXAMPLE — TASK 9 hover ─── */
+
+.glass-card[data-q]:hover {
+  color: var(--text) !important;
+  border-color: rgba(167, 139, 250, 0.4) !important;
+  box-shadow: 0 0 20px rgba(167, 139, 250, 0.08), 0 12px 28px rgba(0,0,0,0.25) !important;
+}
+
+/* ─── CHAT AVATAR PULSE ─── */
+
+.chat-avatar {
+  animation: avatarGlow 3s ease-in-out infinite;
+}
+
+@keyframes avatarGlow {
+  0%, 100% {
+    box-shadow: 0 0 0 0 rgba(167, 139, 250, 0);
+  }
+  50% {
+    box-shadow: 0 0 12px 3px rgba(167, 139, 250, 0.25);
+  }
+}
+
+/* ─── KPI CARD HOVER GLOW — TASK 9 ─── */
+
+.kpi-card:hover {
+  box-shadow: 0 0 24px rgba(56, 189, 248, 0.07), 0 12px 32px rgba(0, 0, 0, 0.3) !important;
+}
+
+/* ─── CUSTOMERS EXTRA GRID ─── */
+
+#customersExtra {
+  animation: fadeGridIn 0.3s ease forwards;
+}
+
+@keyframes fadeGridIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+/* ─── VIEW ALL BUTTON ─── */
+
+.view-all-btn:active {
+  transform: scale(0.97) !important;
+}
+
+/* ─── LOGIN BADGE ─── */
+
+.login-badge {
+  animation: badgePulse 4s ease-in-out infinite;
+}
+
+@keyframes badgePulse {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(56, 189, 248, 0); }
+  50%       { box-shadow: 0 0 16px 2px rgba(56, 189, 248, 0.1); }
+}
+
+/* ─── CHURN ALERT HOVER ─── */
+
+.churn-alert {
+  transition: all 0.2s ease;
+}
+
+.churn-alert:hover {
+  border-color: rgba(244, 63, 94, 0.4) !important;
+  box-shadow: 0 0 16px rgba(244, 63, 94, 0.08);
+  transform: translateY(-2px);
+}
+
+/* ─── HEALTH SCORE BARS ─── */
+
+#healthScoreContainer > div:not(:first-child) {
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+/* ─── SECTION DIVIDER GLOW ─── */
+
+.h-line {
+  box-shadow: 0 1px 0 rgba(56, 189, 248, 0.04);
+}
+
+/* ─── FEATURE GRID SPAN FIX ON MOBILE ─── */
+
+@media (max-width: 640px) {
+  .glass-card[style*="grid-column: span 2"],
+  .glass-card[style*="grid-column:span 2"] {
+    grid-column: span 1 !important;
+  }
+}
