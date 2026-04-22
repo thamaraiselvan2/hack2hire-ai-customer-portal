@@ -24,7 +24,7 @@ for customer in customers:
     usage = customer[5]
     tickets = customer[4]
     nps = customer[6]
-    expiry = customer[7]
+    expiry = customer[9]   # ✅ correct column index
 
     # usage check
     if usage == "Low":
@@ -32,12 +32,16 @@ for customer in customers:
 
     # expiry check
     expiry_date = datetime.strptime(expiry, "%Y-%m-%d")
-    months_left = (expiry_date.year - today.year) * 12 + expiry_date.month - today.month
+
+    months_left = (
+        (expiry_date.year - today.year) * 12
+        + expiry_date.month - today.month
+    )
 
     if months_left <= 3:
         expiring_soon += 1
 
-    # simple health classification logic
+    # health classification logic
     score = 50 + (nps * 2) - (tickets * 2)
 
     if score >= 75:

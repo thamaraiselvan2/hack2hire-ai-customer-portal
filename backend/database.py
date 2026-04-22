@@ -1,13 +1,15 @@
 import sqlite3
 import csv
 
-# connect to database (creates file if not exists)
+# connect to database
 conn = sqlite3.connect("customers.db")
 cursor = conn.cursor()
 
-# create table
+# recreate table fresh
+cursor.execute("DROP TABLE IF EXISTS customers")
+
 cursor.execute("""
-CREATE TABLE IF NOT EXISTS customers (
+CREATE TABLE customers (
     company_name TEXT,
     region TEXT,
     plan_tier TEXT,
@@ -15,22 +17,28 @@ CREATE TABLE IF NOT EXISTS customers (
     support_tickets INTEGER,
     monthly_usage TEXT,
     nps_score INTEGER,
+    signup_date TEXT,
+    last_active_date TEXT,
     contract_expiry TEXT
 )
 """)
 
-# read CSV file
-with open("../data/customers.csv", "r") as file:
+# read CSV safely
+with open("../data/customers.csv", "r", encoding="utf-8") as file:
     reader = csv.reader(file)
     next(reader)  # skip header
 
     for row in reader:
+
+        # skip empty rows
+        if len(row) != 10:
+            continue
+
         cursor.execute("""
-        INSERT INTO customers VALUES (?, ?, ?, ?, ?, ?, ?, ?)
+        INSERT INTO customers VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
         """, row)
 
-# save changes
 conn.commit()
 conn.close()
 
-print("Database created and data inserted successfully!")
+print("Database recreated and updated successfully!")

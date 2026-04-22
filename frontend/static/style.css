@@ -35,13 +35,13 @@
   }
 }
 
-/* ─── SECTION SPACING — TASK 9 ─── */
+/* ─── SECTION SPACING ─── */
 
 section {
   scroll-margin-top: 80px;
 }
 
-/* ─── CARD SPACING — TASK 9 ─── */
+/* ─── CARD TRANSITIONS ─── */
 
 .glass-card,
 .kpi-card,
@@ -94,7 +94,7 @@ section {
   background: rgba(56, 189, 248, 0.18);
 }
 
-/* ─── GLASS CARD QUERY EXAMPLE — TASK 9 hover ─── */
+/* ─── GLASS CARD QUERY EXAMPLE hover ─── */
 
 .glass-card[data-q]:hover {
   color: var(--text) !important;
@@ -117,7 +117,7 @@ section {
   }
 }
 
-/* ─── KPI CARD HOVER GLOW — TASK 9 ─── */
+/* ─── KPI CARD HOVER GLOW ─── */
 
 .kpi-card:hover {
   box-shadow: 0 0 24px rgba(56, 189, 248, 0.07), 0 12px 32px rgba(0, 0, 0, 0.3) !important;
@@ -182,4 +182,56 @@ section {
   .glass-card[style*="grid-column:span 2"] {
     grid-column: span 1 !important;
   }
+}
+
+/* ══════════════════════════════════════════
+   TASK 3: ACTIVE NAV-LINK HIGHLIGHT
+══════════════════════════════════════════ */
+
+.nav-link.active {
+  color: #38bdf8 !important;
+  border-bottom: 2px solid #38bdf8;
+  padding-bottom: 2px;
+}
+
+/* Smooth transition into active state */
+.nav-link {
+  transition: color 0.2s ease, border-color 0.2s ease;
+  border-bottom: 2px solid transparent;
+  padding-bottom: 2px;
+}
+
+/* ══════════════════════════════════════════
+   TASK 4: ANALYTICS STATUS BADGE
+══════════════════════════════════════════ */
+
+.analytics-status-badge {
+  transition: box-shadow 0.3s ease;
+}
+
+.analytics-status-badge:hover {
+  box-shadow: 0 0 20px rgba(34, 211, 238, 0.15);
+}
+
+/* ══════════════════════════════════════════
+   TASK 6: INSIGHTS ENGINE LABEL
+══════════════════════════════════════════ */
+
+.insights-engine-label {
+  transition: all 0.2s ease;
+}
+
+.insights-engine-label:hover {
+  background: rgba(167, 139, 250, 0.12);
+  border-color: rgba(167, 139, 250, 0.4);
+  box-shadow: 0 0 16px rgba(167, 139, 250, 0.1);
+}
+
+/* ══════════════════════════════════════════
+   NAVBAR: ensure border-bottom doesn't shift layout on non-active links
+══════════════════════════════════════════ */
+
+.nav-links .nav-link {
+  display: inline-flex;
+  align-items: center;
 }

@@ -19,6 +19,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   initChat();
   initFadeUpObserver();
+  initActiveNavHighlight(); // TASK 3: active nav scroll detection
   loadChurnAlerts();
   loadWeeklyReport();
 
@@ -57,6 +58,56 @@ function toggleMenu() {
 }
 
 /* ===============================
+   TASK 3: ACTIVE NAV-LINK HIGHLIGHT
+   Highlights the navbar link matching the
+   section currently visible in the viewport.
+=============================== */
+
+function initActiveNavHighlight() {
+  // Map section IDs to their nav links via data-section attribute
+  const navLinks = document.querySelectorAll(".nav-link[data-section]");
+  if (!navLinks.length) return;
+
+  // Build list of watched sections
+  const sections = [];
+  navLinks.forEach(link => {
+    const id = link.getAttribute("data-section");
+    const section = document.getElementById(id);
+    if (section) sections.push({ id, section, link });
+  });
+
+  if (!sections.length) return;
+
+  function updateActiveLink() {
+    const scrollY = window.scrollY;
+    const windowH = window.innerHeight;
+
+    let activeSectionId = null;
+
+    // Find which section's top is closest to (but above) 40% viewport height
+    // This gives a natural feel — section activates as you scroll into it
+    for (let i = sections.length - 1; i >= 0; i--) {
+      const { section, id } = sections[i];
+      const top = section.getBoundingClientRect().top + scrollY;
+      if (scrollY + windowH * 0.4 >= top) {
+        activeSectionId = id;
+        break;
+      }
+    }
+
+    // Apply/remove active class
+    navLinks.forEach(link => {
+      const isActive = link.getAttribute("data-section") === activeSectionId;
+      link.classList.toggle("active", isActive);
+    });
+  }
+
+  // Listen to scroll and call on load
+  window.addEventListener("scroll", updateActiveLink, { passive: true });
+  updateActiveLink();
+}
+
+/* ===============================
    DASHBOARD STATS
 =============================== */
 
@@ -83,7 +134,7 @@ async function loadDashboardStats() {
 }
 
 /* ===============================
-   LOAD CUSTOMERS — TASK 8
+   LOAD CUSTOMERS
    Show first 3 initially, rest on "View All"
 =============================== */
 
@@ -117,16 +168,13 @@ async function loadCustomers() {
       rest.forEach(customer => {
         extra.innerHTML += buildCustomerCard(customer);
       });
-      // Show View All button
       if (btnWrap) btnWrap.style.display = "flex";
     } else {
-      // No extra customers — hide button
       if (btnWrap) btnWrap.style.display = "none";
     }
 
   } catch (err) {
     console.warn("Customers API missing");
-    // Hide View All button if API fails
     const btnWrap = document.getElementById("viewAllWrap");
     if (btnWrap) btnWrap.style.display = "none";
   }
@@ -154,7 +202,6 @@ function expandCustomers() {
 
   if (extra) {
     extra.style.display = "grid";
-    // Animate cards in
     Array.from(extra.children).forEach((card, i) => {
       card.style.opacity = "0";
       card.style.transform = "translateY(20px)";
@@ -166,7 +213,6 @@ function expandCustomers() {
     });
   }
 
-  // Remove the button after expanding
   if (btnWrap) btnWrap.style.display = "none";
 }
 
@@ -183,7 +229,6 @@ async function loadHealthScores() {
     const container = document.getElementById("healthScoreContainer");
     if (!container) return;
 
-    // Keep the legend row, then append scores
     const legend = container.querySelector("div");
     container.innerHTML = "";
     if (legend) container.appendChild(legend);
@@ -219,81 +264,63 @@ async function loadHealthScores() {
    CHURN ALERTS
 =============================== */
 
-
 async function loadChurnAlerts() {
+  try {
+    const response = await fetch("/api/churn");
+    const data = await response.json();
 
-  const res = await fetch("/api/churn");
-  const data = await res.json();
+    const container = document.getElementById("churnAlertsContainer");
+    if (!container) return;
 
-  const container = document.getElementById("churnAlertsContainer");
+    container.innerHTML = "";
 
-  if (!container) return;
+    if (data.length === 0) {
+      container.innerHTML =
+        "<div style='color:var(--muted);font-size:13px;'>No churn risks detected.</div>";
+      return;
+    }
 
-  container.innerHTML = "";
+    data.forEach(customer => {
+      const alertCard = document.createElement("div");
+      alertCard.className = "churn-alert";
+      alertCard.innerHTML = `
+        <strong>${customer.company_name}</strong><br>
+        Churn Probability: ${customer.churn_probability}%
+      `;
+      container.appendChild(alertCard);
+    });
 
-  data.forEach(customer => {
-
-    const row = document.createElement("div");
-
-    row.style.marginBottom = "8px";
-
-    row.innerHTML =
-      `<strong>${customer.company_name}</strong> — Risk: ${customer.churn_probability}%`;
-
-    container.appendChild(row);
-
-  });
-
+  } catch (error) {
+    console.error("Error loading churn alerts:", error);
+  }
 }
-
-loadChurnAlerts();
 
 /* ===============================
    WEEKLY REPORT
 =============================== */
 
 async function loadWeeklyReport() {
-
   try {
-
     const response = await fetch("/api/report/weekly");
-
     const data = await response.json();
 
-    // Update summary text
-    const summaryBlock =
-      document.querySelector("#weeklyReportContainer p");
-
+    const summaryBlock = document.querySelector("#weeklyReportContainer p");
     if (summaryBlock) {
       summaryBlock.textContent = data.summary;
     }
 
-    // Update KPI values
+    setText("activeUsersValue",   data.active_users);
+    setText("mrrGrowthValue",     "+" + data.mrr_growth + "%");
+    setText("churnRiskValue",     "+" + data.churn_risk_change + "%");
+    setText("accountsSavedValue", data.accounts_saved);
 
-    document.getElementById("activeUsersValue").textContent =
-      data.active_users;
-
-    document.getElementById("mrrGrowthValue").textContent =
-      "+" + data.mrr_growth + "%";
-
-    document.getElementById("churnRiskValue").textContent =
-      "+" + data.churn_risk_change + "%";
-
-    document.getElementById("accountsSavedValue").textContent =
-      data.accounts_saved;
-
-  }
-
-  catch (error) {
-
+  } catch (error) {
     console.error("Weekly report load error:", error);
-
   }
-
 }
 
 /* ===============================
-   CHAT SYSTEM — TASKS 5, 6, 7
+   CHAT SYSTEM
 =============================== */
 
 function initChat() {
@@ -317,7 +344,6 @@ function sendSuggestion(el) {
     input.value = text;
     handleQuery();
   }
-  // Hide chips after first use for cleaner UI
   const chips = document.getElementById("chatSuggestions");
   if (chips) chips.style.display = "none";
 }
@@ -328,17 +354,13 @@ async function handleQuery() {
   const q = input ? input.value.trim() : "";
   if (!q) return;
 
-  // Clear input
   if (input) input.value = "";
 
-  // Hide suggestion chips after first real message
   const chips = document.getElementById("chatSuggestions");
   if (chips) chips.style.display = "none";
 
-  // Append user bubble — TASK 7: right-aligned
   appendBubble(q, "user");
 
-  // Show typing indicator
   const typingId = showTyping();
 
   try {
@@ -350,10 +372,8 @@ async function handleQuery() {
 
     const data = await res.json();
 
-    // Remove typing indicator
     removeTyping(typingId);
 
-    // Clean the answer — remove any prefix labels
     let cleaned = (data.answer || "")
       .replace(/High[\-‑]risk customers:/gi, "")
       .replace(/Customers with low usage:/gi, "")
@@ -368,7 +388,6 @@ async function handleQuery() {
       return;
     }
 
-    // TASK 7: Animate each item in with staggered delay — left-aligned bubbles
     items.forEach((item, index) => {
       setTimeout(() => {
         appendBubble(item, "ai");
@@ -382,7 +401,7 @@ async function handleQuery() {
   }
 }
 
-/* Append a chat bubble — TASK 7: user = right, ai = left */
+/* Append a chat bubble — user = right, ai = left */
 function appendBubble(text, type) {
   const messages = document.getElementById("chatMessages");
   if (!messages) return;
@@ -457,124 +476,17 @@ function setText(id, value) {
   const el = document.getElementById(id);
   if (el) el.textContent = value;
 }
-// ===============================
-// LOAD CHURN ALERTS
-// ===============================
 
-async function loadChurnAlerts() {
+/* ===============================
+   DASHBOARD CHARTS
+=============================== */
 
-  try {
-
-    const response = await fetch("/api/churn");
-    const data = await response.json();
-
-    const container = document.getElementById("churnAlertsContainer");
-
-    if (!container) return;
-
-    container.innerHTML = "";
-
-    if (data.length === 0) {
-
-      container.innerHTML =
-        "<div style='color:var(--muted);font-size:13px;'>No churn risks detected.</div>";
-
-      return;
-    }
-
-    data.forEach(customer => {
-
-      const alertCard = document.createElement("div");
-
-      alertCard.className = "churn-alert";
-
-      alertCard.innerHTML = `
-        <strong>${customer.company_name}</strong><br>
-        Churn Probability: ${customer.churn_probability}%
-      `;
-
-      container.appendChild(alertCard);
-
-    });
-
-  } catch (error) {
-
-    console.error("Error loading churn alerts:", error);
-
-  }
-
-}
-// ===============================
-// LOAD WEEKLY REPORT DATA
-// ===============================
-
-async function loadWeeklyReport() {
-
-  try {
-
-    const response = await fetch("/api/report/weekly");
-    const data = await response.json();
-
-    // Executive summary
-    const summaryBlock = document.querySelector(
-      "#weeklyReportContainer p"
-    );
-
-    if (summaryBlock) {
-      summaryBlock.textContent = data.summary;
-    }
-
-    // KPI values
-    const kpiCards = document.querySelectorAll(
-      "#weeklyReportContainer .surface2 div"
-    );
-
-  } catch (error) {
-
-    console.error("Error loading weekly report:", error);
-
-  }
-
-}
-// ===============================
-// AUTO REFRESH DASHBOARD EVERY 20 SECONDS
-// ===============================
-
-setInterval(() => {
-
-  console.log("Refreshing dashboard data...");
-
-  loadDashboardStats();
-  loadCustomers();
-  loadHealthScores();
-  loadChurnAlerts();
-  loadWeeklyReport();
-
-}, 20000);
-async function loadWeeklyReportStats() {
-  const res = await fetch("/api/weekly-stats");
-  const data = await res.json();
-
-  document.getElementById("weeklyMRR").textContent =
-    data.mrr_growth + "%";
-
-  document.getElementById("weeklyChurnRisk").textContent =
-    data.churn_risk + "%";
-
-  document.getElementById("weeklyAccountsSaved").textContent =
-    data.accounts_saved;
-}
-
-loadWeeklyReportStats();
 async function loadDashboardCharts() {
-
   const res = await fetch("/api/dashboard-charts");
   const data = await res.json();
 
-
   // Customer Growth Line Chart
   const ctxLine = document.getElementById("lineChart");
-
   new Chart(ctxLine, {
     type: "line",
     data: {
@@ -599,89 +511,115 @@ async function loadDashboardCharts() {
     options: {
       responsive: true,
       plugins: {
-        legend: {
-          labels: {
-            color: "#e2e8f0"
-          }
-        }
+        legend: { labels: { color: "#e2e8f0" } }
       },
       scales: {
-        x: {
-          ticks: { color: "#64748b" }
-        },
-        y: {
-          ticks: { color: "#64748b" }
-        }
+        x: { ticks: { color: "#64748b" } },
+        y: { ticks: { color: "#64748b" } }
       }
     }
   });
-
 
   // User Segments Pie Chart
   const ctxPie = document.getElementById("pieChart");
-
-new Chart(ctxPie, {
-  type: "doughnut",
-  data: {
-    labels: data.segments.labels,
-    datasets: [{
-      data: data.segments.values,
-        backgroundColor: [
-          "#38bdf8",
-          "#a78bfa",
-          "#22d3ee",
-          "#f43f5e"
-        ]
+  new Chart(ctxPie, {
+    type: "doughnut",
+    data: {
+      labels: data.segments.labels,
+      datasets: [{
+        data: data.segments.values,
+        backgroundColor: ["#38bdf8", "#a78bfa", "#22d3ee", "#f43f5e"]
       }]
     },
     options: {
       plugins: {
-        legend: {
-          labels: {
-            color: "#e2e8f0"
-          }
-        }
+        legend: { labels: { color: "#e2e8f0" } }
       }
     }
   });
-
 }
 
 loadDashboardCharts();
+
+/* ===============================
+   WEEKLY ACTIVE USERS CHART
+=============================== */
+
 async function loadWeeklyActiveUsers() {
+  try {
+    const res = await fetch("/api/weekly-active-users");
+    if (!res.ok) return;
+    const data = await res.json();
 
-  const res = await fetch("/api/weekly-active-users");
-  const data = await res.json();
+    const ctx = document.getElementById("reportChart");
+    if (!ctx) return;
 
-  const ctx = document.getElementById("reportChart");
-
-  new Chart(ctx, {
-    type: "bar",
-    data: {
-      labels: data.labels,
-      datasets: [{
-        label: "Active Users",
-        data: data.values,
-        backgroundColor: "#38bdf8"
-      }]
-    },
-    options: {
-      plugins: {
-        legend: {
-          labels: { color: "#e2e8f0" }
-        }
+    new Chart(ctx, {
+      type: "bar",
+      data: {
+        labels: data.labels,
+        datasets: [{
+          label: "Active Users",
+          data: data.values,
+          backgroundColor: "#38bdf8"
+        }]
       },
-      scales: {
-        x: {
-          ticks: { color: "#64748b" }
+      options: {
+        responsive: true,
+        plugins: {
+          legend: { labels: { color: "#e2e8f0" } }
         },
-        y: {
-          ticks: { color: "#64748b" }
+        scales: {
+          x: { ticks: { color: "#64748b" } },
+          y: { ticks: { color: "#64748b" } }
         }
       }
-    }
-  });
+    });
 
+  } catch (err) {
+    console.error("Weekly active users chart error:", err);
+  }
 }
 
 loadWeeklyActiveUsers();
+
+/* ===============================
+   WEEKLY STATS
+=============================== */
+
+async function loadWeeklyReportStats() {
+  try {
+    const res = await fetch("/api/weekly-stats");
+
+    if (!res.ok) return;
+
+    const data = await res.json();
+
+    // Existing stats
+    setText("weeklyMRR", data.mrr_growth + "%");
+    setText("weeklyChurnRisk", data.churn_risk + "%");
+    setText("weeklyAccountsSaved", data.accounts_saved);
+
+    // NEW stat (Contracts Expiring Soon)
+    setText("contractsExpiringValue", data.contracts_expiring);
+
+  } catch (err) {
+    console.warn("Weekly stats API missing");
+  }
+}
+
+// Run function
+loadWeeklyReportStats();
+
+/* ===============================
+   AUTO REFRESH DASHBOARD EVERY 20 SECONDS
+=============================== */
+
+setInterval(() => {
+  console.log("Refreshing dashboard data...");
+  loadDashboardStats();
+  loadCustomers();
+  loadHealthScores();
+  loadChurnAlerts();
+  loadWeeklyReport();
+}, 20000);

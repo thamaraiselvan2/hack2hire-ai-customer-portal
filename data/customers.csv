@@ -1,11 +1,13 @@
-company_name,region,plan_tier,devices_count,support_tickets,monthly_usage,nps_score,contract_expiry
-SkyNet Solutions,South,Premium,12,2,High,9,2026-10-12
-MetroFiber Ltd,North,Standard,5,6,Medium,7,2026-06-01
-TechBridge Systems,East,Basic,3,9,Low,5,2026-04-20
-UrbanNet Services,West,Premium,10,1,High,8,2026-11-02
-NextWave Networks,South,Standard,6,4,Medium,7,2026-08-14
-DataLink Corp,North,Basic,2,7,Low,6,2026-05-30
-SmartGrid Pvt Ltd,East,Premium,15,2,High,9,2026-12-01
-FiberCore Ltd,West,Standard,8,3,Medium,8,2026-09-10
-NetFusion Systems,South,Basic,4,5,Low,6,2026-07-18
-CloudBridge Tech,North,Premium,11,2,High,9,2026-10-05
+company_name,region,plan_tier,devices_count,support_tickets,monthly_usage,nps_score,signup_date,last_active_date,contract_expiry
+SkyNet Solutions,South,Premium,12,2,High,9,2025-01-10,2026-04-10,2026-10-12
+MetroFiber Ltd,North,Standard,5,6,Medium,7,2025-02-15,2026-04-09,2026-06-01
+
+TechBridge Systems,East,Basic,3,15,Low,2,2025-03-12,2026-04-08,2026-04-25
+UrbanNet Services,West,Premium,10,1,High,8,2025-04-18,2026-04-12,2026-11-02
+
+NextWave Networks,South,Standard,6,12,Low,3,2025-05-22,2026-04-07,2026-05-05
+DataLink Corp,North,Basic,2,14,Low,4,2025-06-11,2026-04-06,2026-05-15
+
+SmartGrid Pvt Ltd,East,Premium,15,2,High,9,2025-07-03,2026-04-11,2026-12-01
+FiberCore Ltd,West,Standard,8,3,Medium,8,2025-08-19,2026-04-05,2026-09-10
+
