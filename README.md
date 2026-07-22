@@ -2,7 +2,7 @@
 
 ### Hack2Hire 2026 — National Hackathon Submission · Team TechAuraX
 
-**🔗 Live demo:** _add your Streamlit Cloud URL here after deploying_
+**🔗 Live demo:** https://hack2hire-ai-customer-app-bsaaukclswxdkqfom27ani.streamlit.app/
 **📂 Repo:** https://github.com/thamaraiselvan2/hack2hire-ai-customer-portal
 
 > Turns raw customer engagement data into retention intelligence — health scoring, churn prediction, plain-English querying, and automated executive reports, all in one dashboard.
